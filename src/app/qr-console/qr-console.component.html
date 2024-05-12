@@ -1,0 +1,13 @@
+<mat-grid-list [cols]="6">
+	<mat-grid-tile>
+		<mat-list>
+			<mat-list-item
+			*ngFor="let typeName of qrTypes | keyvalue"
+			(click)="qrTypes[typeName.key].show">
+				{{ qrTypes[typeName.key].name }}
+			</mat-list-item>
+		</mat-list>
+		<mat-divider [vertical]="true" [style.height.%]="100"></mat-divider>
+	</mat-grid-tile>
+	<mat-grid-tile [colspan]="5"></mat-grid-tile>
+</mat-grid-list>
