@@ -1,0 +1,33 @@
+#qr-form {
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	justify-content: center;
+	gap: 20px 0;
+	min-height: calc(100vh - 64px - 2 * 20px);
+	padding: 20px 0 20px 0;
+}
+
+#qr-form form {
+	width: 50%;
+}
+
+#qr-form form mat-form-field {
+	width: 100%;
+}
+
+#qr-form #canvas-container {
+	display: flex;
+	justify-content: center;
+}
+
+#qr-form canvas {
+	min-width: 200px;
+	min-height: 200px;
+}
+
+#qr-form #download-buttons {
+	display: flex;
+	justify-content: center;
+	gap: 0 10px;
+}

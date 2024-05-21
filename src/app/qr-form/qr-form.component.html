@@ -1,0 +1,29 @@
+<div id="qr-form">
+	<form #QRInputForm [formGroup]="form">
+		@if (type === "link") {
+			<mat-form-field>
+				<mat-label>URL</mat-label>
+				<input matInput type="url" name="link" placeholder="Enter URL here" required [formControl]="link">
+			</mat-form-field>
+		} @else if (type === "email") {
+			<mat-form-field>
+				<mat-label>Email</mat-label>
+				<input matInput type="email" name="email" placeholder="Enter your email here" required email [formControl]="email">
+				<mat-hint>{{ email.errors?.["email"] ? "Please enter a valid email." : "" }}</mat-hint>
+			</mat-form-field>
+		}
+	</form>
+	<div id="canvas-container">
+		<canvas #QRCanvas width="200" height="200"></canvas>
+	</div>
+	<div id="download-buttons">
+		<button mat-flat-button color="primary" (click)="saveAsPNG()">
+			<mat-icon fontIcon="save"></mat-icon>
+			Save as PNG
+		</button>
+		<button mat-flat-button color="primary" (click)="saveAsJPEG()">
+			<mat-icon fontIcon="save"></mat-icon>
+			Save as JPEG
+		</button>
+	</div>
+</div>
