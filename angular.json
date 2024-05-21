@@ -29,7 +29,7 @@
               "src/styles.css"
             ],
             "scripts": [
-              "node_modules/qrcode/lib/browser.js"
+              "node_modules/qrcode/build/qrcode.js"
             ]
           },
           "configurations": {
