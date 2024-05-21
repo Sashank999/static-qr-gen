@@ -1,3 +1,28 @@
-app-qr-console mat-list mat-list-item:hover {
+#qr-console {
+	display: flex;
+	flex-flow: row;
+}
+
+#qr-console #qr-types-list {
+	width: 20%;
+	display: flex;
+	align-items: center;
+}
+
+#qr-console #qr-types-list mat-list {
+	width: 100%;
+	text-align: right;
+}
+
+#qr-console #qr-form-container {
+	width: 80%;
+	border-left: 2px solid #bbb;
+}
+
+#qr-types-list mat-list-item.selected {
+	background-color: #aaa;
+}
+
+#qr-types-list mat-list-item:hover {
 	background-color: #ccc !important;
 }

@@ -1,13 +1,16 @@
-<mat-grid-list [cols]="6">
-	<mat-grid-tile>
+<div id="qr-console">
+	<div id="qr-types-list">
 		<mat-list>
-			<mat-list-item
-			*ngFor="let typeName of qrTypes | keyvalue"
-			(click)="qrTypes[typeName.key].show">
-				{{ qrTypes[typeName.key].name }}
-			</mat-list-item>
+			@for (typeName of objkeys(qrTypesTitles); track typeName) {
+				<mat-list-item
+				[ngClass]="{ selected: currentType === typeName }"
+				(click)="currentType = typeName">
+					{{ qrTypesTitles[typeName] }}
+				</mat-list-item>
+			}
 		</mat-list>
-		<mat-divider [vertical]="true" [style.height.%]="100"></mat-divider>
-	</mat-grid-tile>
-	<mat-grid-tile [colspan]="5"></mat-grid-tile>
-</mat-grid-list>
+	</div>
+	<div id="qr-form-container">
+		<app-qr-form [type]="currentType"></app-qr-form>
+	</div>
+</div>

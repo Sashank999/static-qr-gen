@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
 
@@ -6,22 +6,20 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 
-// import QRCode from "qrcode";
+import { QrFormComponent } from "../qr-form/qr-form.component.js";
 
 @Component({
-  selector: 'app-qr-console',
-  standalone: true,
-  imports: [CommonModule, MatGridListModule, MatListModule, MatDividerModule],
-  templateUrl: './qr-console.component.html',
-  styleUrl: './qr-console.component.css',
-  encapsulation: ViewEncapsulation.None
+    selector: 'app-qr-console',
+    standalone: true,
+    templateUrl: './qr-console.component.html',
+    styleUrl: './qr-console.component.css',
+    imports: [CommonModule, MatGridListModule, MatListModule, MatDividerModule, QrFormComponent]
 })
 export class QrConsoleComponent {
-  qrTypes: { [key: string]: { name: string, show: () => void } } = {
-    "link": { name: "Link to QR", show: this.showLinkQR },
-    "mail": { name: "Mail to QR", show: this.showMailQR },
-  }
-
-  showLinkQR(): void {}
-  showMailQR(): void {}
+  objkeys = Object.keys;
+  qrTypesTitles: { [key: string]: string } = {
+    "link": "Link to QR",
+    "email": "Email to QR",
+  };
+  currentType = "link";
 }
