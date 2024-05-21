@@ -11,6 +11,21 @@
 				<input matInput type="email" name="email" placeholder="Enter your email here" required email [formControl]="email">
 				<mat-hint>{{ email.errors?.["email"] ? "Please enter a valid email." : "" }}</mat-hint>
 			</mat-form-field>
+		} @else if (type === "image") {
+			<mat-card>
+				<mat-card-header>
+					<mat-card-title>Usage</mat-card-title>
+				</mat-card-header>
+				<mat-card-content>
+					<div>This directly creates a QR Code that embeds the image at low compression mode. You can print this QR and use any popular QR decoder such as <a href="https://www.zxing.org">ZXing</a> to decode it to your original image.</div>
+					<div>It has a limit of 2953 bytes (around 2 KB).</div>
+				</mat-card-content>
+				<mat-card>
+					<mat-card-content>
+						<input type="file" name="image" accept="image/*" placeholder="Upload your image here" required [formControl]="image" (change)="onFilePicked($event)">
+					</mat-card-content>
+				</mat-card>
+			</mat-card>
 		}
 	</form>
 	<div id="canvas-container">

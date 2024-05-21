@@ -20,6 +20,7 @@ export class QrConsoleComponent {
   qrTypesTitles: { [key: string]: string } = {
     "link": "Link to QR",
     "email": "Email to QR",
+    "image": "Image to QR",
   };
   currentType = "link";
 }

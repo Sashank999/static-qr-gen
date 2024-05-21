@@ -6,7 +6,8 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angula
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
-import { MatSelectModule } from "@angular/material/select";
+import { MatCardModule } from "@angular/material/card";
+import { MatDialog, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 
 import QRCode from "qrcode";
 import { Subscription } from 'rxjs';
@@ -14,31 +15,36 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-qr-form',
   standalone: true,
-  imports: [MatInputModule, CommonModule, ReactiveFormsModule, MatButtonModule, MatIconModule, MatSelectModule],
+  imports: [MatInputModule, CommonModule, ReactiveFormsModule, MatButtonModule, MatIconModule, MatCardModule, MatDialogModule],
   templateUrl: './qr-form.component.html',
   styleUrl: './qr-form.component.css'
 })
 export class QrFormComponent implements AfterContentInit, OnDestroy {
   @Input() type = "link";
+  dialogOpen = false;
   @ViewChild("QRCanvas", { static: true }) QRCanvas!: ElementRef<HTMLCanvasElement>;
 
-  objkeys = Object.keys;
-  imageTypes: { [key: string]: string } = {
-    "png": "image/png",
-    "jpeg": "image/jpeg"
-  };
+  MAX_FILE_SIZE = 2953;
 
   link = new FormControl("https://www.example.com");
   email = new FormControl("", [Validators.email]);
-  form = new FormGroup([this.link, this.email]);
+  image = new FormControl(null);
+  form = new FormGroup([this.link, this.email, this.image]);
 
   subscription: Subscription;
 
-  constructor() {
+  constructor(public dialog: MatDialog) {
     this.subscription = this.form.valueChanges.subscribe(() => {
       if (this.type === "link") this.showLinkQR(this.link.getRawValue());
       else if (this.type === "email") this.showEmailQR(this.email.getRawValue());
+
+      // File uploads are not usable in Reactive Forms.
+      // else if (this.type === "image") this.showImageQR(this.image.getRawValue());
     });
+  }
+
+  onFilePicked(event: Event) {
+    if (this.type === "image") this.showImageQR((event.target as HTMLInputElement).files ?? null);
   }
 
   ngAfterContentInit(): void {
@@ -65,6 +71,33 @@ export class QrFormComponent implements AfterContentInit, OnDestroy {
 
     QRCode.toCanvas(this.QRCanvas.nativeElement, "mailto:" + email, (error) => {
       if (error) console.error(error);
+    });
+  }
+
+  showImageQR(imageFiles: FileList | null) {
+    if (!imageFiles || !imageFiles.length) {
+      this.clearCanvas();
+      return;
+    }
+
+    const imageFile = imageFiles[0];
+    if (imageFile.size > this.MAX_FILE_SIZE) {
+      this.dialog.open(FileSizeLimitExceededDialog);
+      return;
+    }
+
+    imageFiles[0].arrayBuffer().then((buffer) => {
+      const imageBuffer = new Uint8ClampedArray(buffer);
+
+      QRCode.toCanvas(
+        this.QRCanvas.nativeElement,
+        // @ts-ignore
+        [{ data: imageBuffer, mode: "byte"}],
+        { errorCorrectionLevel: 'L' },
+        (error) => {
+          if (error) console.error(error);
+        }
+      );
     });
   }
 
@@ -100,4 +133,23 @@ export class QrFormComponent implements AfterContentInit, OnDestroy {
   ngOnDestroy() {
       this.subscription?.unsubscribe();
   }
+}
+
+
+@Component({
+  selector: 'app-file-size-limit-exceeded',
+  standalone: true,
+  imports: [MatButtonModule, MatDialogModule],
+  template: `
+    <h2 mat-dialog-title>File Size Limit Exceeded</h2>
+    <mat-dialog-content>
+      <p>Maximum file size is 2953 bytes (around 2 KB). Please select a smaller file.</p>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <button mat-button (click)="dialogRef.close()">Ok</button>
+    </mat-dialog-actions>
+  `,
+})
+export class FileSizeLimitExceededDialog {
+  constructor(public dialogRef: MatDialogRef<FileSizeLimitExceededDialog>) {}
 }
