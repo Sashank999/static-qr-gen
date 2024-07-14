@@ -21,7 +21,8 @@ export class QrConsoleComponent {
     "link": "Link to QR",
     "email": "Email to QR",
     "image": "Image to QR",
-    "torrent": "Torrent to QR",
+    "sms": "SMS to QR",
+    "text": "Text to QR",
   };
   currentType = "link";
 }

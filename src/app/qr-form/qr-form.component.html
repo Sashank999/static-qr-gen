@@ -26,6 +26,23 @@
 					</mat-card-content>
 				</mat-card>
 			</mat-card>
+		} @else if (type === "sms") {
+			<mat-form-field>
+				<mat-label>Mobile Number</mat-label>
+				<input matInput type="tel" name="tel" placeholder="Enter mobile number here" required [formControl]="mobileNumber">
+				@if (mobileNumber.touched && mobileNumber.errors) {
+					<mat-hint>Please enter a valid mobile number.</mat-hint>
+				}
+			</mat-form-field>
+			<mat-form-field>
+				<mat-label>SMS Contents</mat-label>
+				<input matInput type="text" name="text" placeholder="Enter SMS contents here" required [formControl]="text">
+			</mat-form-field>
+		} @else if (type === "text") {
+			<mat-form-field>
+				<mat-label>Text</mat-label>
+				<input matInput type="text" name="text" placeholder="Enter text here" required [formControl]="text">
+			</mat-form-field>
 		}
 	</form>
 	<div id="canvas-container">

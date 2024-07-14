@@ -37,6 +37,8 @@ export class QrFormComponent implements AfterContentInit, OnDestroy {
     this.subscription = this.form.valueChanges.subscribe(() => {
       if (this.type === "link") this.showLinkQR(this.link.getRawValue());
       else if (this.type === "email") this.showEmailQR(this.email.getRawValue());
+      else if (this.type === "sms") this.showSMSQR(this.mobileNumber.getRawValue(), this.text.getRawValue());
+      else if (this.type === "text") this.showTextQR(this.text.getRawValue());
 
       // File uploads are not usable in Reactive Forms.
       // else if (this.type === "image") this.showImageQR(this.image.getRawValue());
@@ -101,6 +103,32 @@ export class QrFormComponent implements AfterContentInit, OnDestroy {
     });
   }
 
+  showSMSQR(mobileNumber: string | null, text: string | null) {
+    if (!mobileNumber || !text) {
+      this.showErrorOnCanvas();
+      return;
+    }
+
+    QRCode.toCanvas(this.QRCanvas.nativeElement, "smsto:" + mobileNumber + ":" + text, (error) => {
+      if (error) console.error(error);
+    });
+  }
+
+  showTextQR(text: string | null) {
+    if (!text) {
+      this.showErrorOnCanvas();
+      return;
+    }
+
+    QRCode.toCanvas(this.QRCanvas.nativeElement, text, (error) => {
+      if (error) console.error(error);
+    });
+  }
+
+
+  showErrorOnCanvas() {
+    this.QRCanvas.nativeElement.getContext("2d")?.fillText("Error.", 0, 0);
+  }
 
   clearCanvas() {
     this.QRCanvas.nativeElement.getContext("2d")?.clearRect(0, 0, this.QRCanvas.nativeElement.width, this.QRCanvas.nativeElement.height);
