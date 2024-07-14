@@ -29,5 +29,21 @@
 #qr-form #download-buttons {
 	display: flex;
 	justify-content: center;
-	gap: 0 10px;
+	gap: 10px;
+}
+
+@media screen and (max-width: 768px) {
+	#qr-form form {
+		width: 100%;
+	}
+
+	#qr-form form mat-form-field {
+		--margin: 25px;
+		width: calc(100% - 2 * var(--margin));
+		margin: 0 var(--margin);
+	}
+
+	#qr-form #download-buttons {
+		flex-wrap: wrap;
+	}
 }
