@@ -4,8 +4,10 @@
 	align-items: center;
 	justify-content: center;
 	gap: 20px 0;
-	min-height: calc(100vh - 64px - 2 * 20px);
-	padding: 20px 0 20px 0;
+
+	--qr-form-padding: 20px;
+	height: calc(100vh - var(--mat-toolbar-standard-height) - 2 * var(--qr-form-padding));
+	padding: var(--qr-form-padding) 0;
 }
 
 #qr-form form {
@@ -33,6 +35,10 @@
 }
 
 @media screen and (max-width: 768px) {
+	#qr-form {
+		height: unset;
+	}
+
 	#qr-form form {
 		width: 100%;
 	}
