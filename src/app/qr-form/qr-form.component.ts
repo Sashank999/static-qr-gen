@@ -29,8 +29,8 @@ export class QrFormComponent implements AfterContentInit, OnDestroy {
   link = new FormControl("https://www.example.com", Validators.required);
   email = new FormControl("", [Validators.required, Validators.email]);
   image = new FormControl(null, Validators.required);
-  mobileNumber = new FormControl(null, [Validators.required, Validators.pattern(/^\+[0-9]+$/)]);
-  text = new FormControl(null, Validators.required);
+  mobileNumber = new FormControl("+91-xxxx", [Validators.required, Validators.pattern(/^\+[0-9]+$/)]);
+  text = new FormControl("", Validators.required);
 
   form = new FormGroup([this.link, this.email, this.image, this.mobileNumber, this.text]);
 
