@@ -130,7 +130,25 @@ export class QrFormComponent implements AfterContentInit, OnDestroy {
 
 
   showErrorOnCanvas() {
-    this.QRCanvas.nativeElement.getContext("2d")?.fillText("Error.", 0, 0);
+    const CANVAS_MIN_WIDTH = 200;
+    const CANVAS_MIN_HEIGHT = 200;
+
+    const ctx = this.QRCanvas.nativeElement.getContext("2d");
+    if (!ctx) return;
+
+    // https://stackoverflow.com/a/65124939
+    const ratio = window.devicePixelRatio;
+    ctx.canvas.width = CANVAS_MIN_WIDTH * ratio;
+    ctx.canvas.height = CANVAS_MIN_HEIGHT * ratio;
+    ctx.canvas.style.width = CANVAS_MIN_WIDTH + "px";
+    ctx.canvas.style.height = CANVAS_MIN_HEIGHT + "px";
+    ctx.scale(ratio, ratio);
+
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    ctx.font = "bold 20px sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillStyle = "white";
+    ctx.fillText("Invalid Data", ctx.canvas.width / 2, ctx.canvas.height / 2);
   }
 
   clearCanvas() {
