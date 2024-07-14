@@ -26,3 +26,29 @@
 #qr-types-list mat-list-item:hover {
 	background-color: #ccc !important;
 }
+
+@media screen and (max-width: 768px) {
+	#qr-console {
+		flex-flow: column;
+	}
+
+	#qr-console #qr-form-container {
+		border-top: 2px solid #bbb;
+		border-left: none;
+		width: 100%;
+	}
+
+	#qr-console #qr-types-list {
+		width: 100%;
+	}
+
+	#qr-console #qr-types-list mat-list {
+		display: flex;
+		overflow-x: scroll;
+	}
+
+	#qr-types-list mat-list-item {
+		width: fit-content;
+		flex-shrink: 0;
+	}
+}
