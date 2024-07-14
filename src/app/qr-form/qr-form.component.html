@@ -9,7 +9,9 @@
 			<mat-form-field>
 				<mat-label>Email</mat-label>
 				<input matInput type="email" name="email" placeholder="Enter your email here" required email [formControl]="email">
-				<mat-hint>{{ email.errors?.["email"] ? "Please enter a valid email." : "" }}</mat-hint>
+				@if (email.touched && email.errors?.["email"]) {
+					<mat-hint>Please enter a valid email.</mat-hint>
+				}
 			</mat-form-field>
 		} @else if (type === "image") {
 			<mat-card>

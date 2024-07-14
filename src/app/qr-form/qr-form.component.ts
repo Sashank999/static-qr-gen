@@ -26,10 +26,13 @@ export class QrFormComponent implements AfterContentInit, OnDestroy {
 
   MAX_FILE_SIZE = 2953;
 
-  link = new FormControl("https://www.example.com");
-  email = new FormControl("", [Validators.email]);
-  image = new FormControl(null);
-  form = new FormGroup([this.link, this.email, this.image]);
+  link = new FormControl("https://www.example.com", Validators.required);
+  email = new FormControl("", [Validators.required, Validators.email]);
+  image = new FormControl(null, Validators.required);
+  mobileNumber = new FormControl(null, [Validators.required, Validators.pattern(/^\+[0-9]+$/)]);
+  text = new FormControl(null, Validators.required);
+
+  form = new FormGroup([this.link, this.email, this.image, this.mobileNumber, this.text]);
 
   subscription: Subscription;
 
@@ -56,7 +59,7 @@ export class QrFormComponent implements AfterContentInit, OnDestroy {
 
   showLinkQR(text: string | null) {
     if (!text) {
-      this.clearCanvas();
+      this.showErrorOnCanvas();
       return;
     }
 
@@ -67,7 +70,7 @@ export class QrFormComponent implements AfterContentInit, OnDestroy {
 
   showEmailQR(email: string | null) {
     if (!email) {
-      this.clearCanvas();
+      this.showErrorOnCanvas();
       return;
     }
 
@@ -78,7 +81,7 @@ export class QrFormComponent implements AfterContentInit, OnDestroy {
 
   showImageQR(imageFiles: FileList | null) {
     if (!imageFiles || !imageFiles.length) {
-      this.clearCanvas();
+      this.showErrorOnCanvas();
       return;
     }
 
