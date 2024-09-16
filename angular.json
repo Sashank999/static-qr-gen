@@ -29,9 +29,7 @@
               "@angular/material/prebuilt-themes/purple-green.css",
               "src/styles.css"
             ],
-            "scripts": [
-              "node_modules/qrcode/build/qrcode.js"
-            ]
+            "allowedCommonJsDependencies": ["qrcode"]
           },
           "configurations": {
             "production": {
