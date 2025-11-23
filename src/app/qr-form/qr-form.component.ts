@@ -1,6 +1,6 @@
 import { Component, Input, ViewChild, ElementRef, AfterContentInit, OnDestroy } from '@angular/core';
 
-import { CommonModule } from "@angular/common";
+
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 
 import { MatInputModule } from '@angular/material/input';
@@ -14,7 +14,7 @@ import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-qr-form',
-    imports: [MatInputModule, CommonModule, ReactiveFormsModule, MatButtonModule, MatIconModule, MatCardModule, MatDialogModule],
+    imports: [MatInputModule, ReactiveFormsModule, MatButtonModule, MatIconModule, MatCardModule, MatDialogModule],
     templateUrl: './qr-form.component.html',
     styleUrl: './qr-form.component.css'
 })
