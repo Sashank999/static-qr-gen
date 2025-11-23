@@ -10,7 +10,6 @@ import { QrFormComponent } from "../qr-form/qr-form.component.js";
 
 @Component({
     selector: 'app-qr-console',
-    standalone: true,
     templateUrl: './qr-console.component.html',
     styleUrl: './qr-console.component.css',
     imports: [CommonModule, MatGridListModule, MatListModule, MatDividerModule, QrFormComponent]

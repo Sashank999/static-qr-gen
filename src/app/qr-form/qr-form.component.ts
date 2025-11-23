@@ -13,11 +13,10 @@ import QRCode from "qrcode";
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-qr-form',
-  standalone: true,
-  imports: [MatInputModule, CommonModule, ReactiveFormsModule, MatButtonModule, MatIconModule, MatCardModule, MatDialogModule],
-  templateUrl: './qr-form.component.html',
-  styleUrl: './qr-form.component.css'
+    selector: 'app-qr-form',
+    imports: [MatInputModule, CommonModule, ReactiveFormsModule, MatButtonModule, MatIconModule, MatCardModule, MatDialogModule],
+    templateUrl: './qr-form.component.html',
+    styleUrl: './qr-form.component.css'
 })
 export class QrFormComponent implements AfterContentInit, OnDestroy {
   @Input() type = "link";
@@ -186,10 +185,9 @@ export class QrFormComponent implements AfterContentInit, OnDestroy {
 
 
 @Component({
-  selector: 'app-file-size-limit-exceeded',
-  standalone: true,
-  imports: [MatButtonModule, MatDialogModule],
-  template: `
+    selector: 'app-file-size-limit-exceeded',
+    imports: [MatButtonModule, MatDialogModule],
+    template: `
     <h2 mat-dialog-title>File Size Limit Exceeded</h2>
     <mat-dialog-content>
       <p>Maximum file size is 2953 bytes (around 2 KB). Please select a smaller file.</p>
@@ -197,7 +195,7 @@ export class QrFormComponent implements AfterContentInit, OnDestroy {
     <mat-dialog-actions>
       <button mat-button (click)="dialogRef.close()">Ok</button>
     </mat-dialog-actions>
-  `,
+  `
 })
 export class FileSizeLimitExceededDialog {
   constructor(public dialogRef: MatDialogRef<FileSizeLimitExceededDialog>) {}
