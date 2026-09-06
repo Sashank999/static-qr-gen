@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
 
@@ -12,6 +12,7 @@ import { QrFormComponent } from "../qr-form/qr-form.component.js";
     selector: 'app-qr-console',
     templateUrl: './qr-console.component.html',
     styleUrl: './qr-console.component.css',
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [CommonModule, MatGridListModule, MatListModule, MatDividerModule, QrFormComponent]
 })
 export class QrConsoleComponent {

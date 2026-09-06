@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 import { HeaderComponent } from './header/header.component.js';
@@ -8,6 +8,7 @@ import { QrConsoleComponent } from './qr-console/qr-console.component.js';
     selector: 'app-root',
     imports: [RouterOutlet, HeaderComponent, QrConsoleComponent],
     templateUrl: './app.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './app.component.css'
 })
 export class AppComponent {

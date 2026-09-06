@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, ElementRef, AfterContentInit, OnDestroy } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, AfterContentInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 
 
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
@@ -16,6 +16,7 @@ import { Subscription } from 'rxjs';
     selector: 'app-qr-form',
     imports: [MatInputModule, ReactiveFormsModule, MatButtonModule, MatIconModule, MatCardModule, MatDialogModule],
     templateUrl: './qr-form.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './qr-form.component.css'
 })
 export class QrFormComponent implements AfterContentInit, OnDestroy {
@@ -187,6 +188,7 @@ export class QrFormComponent implements AfterContentInit, OnDestroy {
 @Component({
     selector: 'app-file-size-limit-exceeded',
     imports: [MatButtonModule, MatDialogModule],
+    changeDetection: ChangeDetectionStrategy.Eager,
     template: `
     <h2 mat-dialog-title>File Size Limit Exceeded</h2>
     <mat-dialog-content>
